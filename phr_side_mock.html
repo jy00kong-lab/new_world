@@ -62,7 +62,7 @@
                 console.error('PhrWebInterface.requestHealthUserId is not available');
                 return;
             }
-            var healthUserId = PhrWeb.requestHealthUserId();
+            var healthUserId = PhrWebInterface.requestHealthUserId();
             window.location.href = buildWalgreensUrlWithParam1(healthUserId);
         });
     })();

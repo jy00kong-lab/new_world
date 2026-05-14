@@ -27,7 +27,7 @@
         }
     </style>
     <script>
-        var WebServiceJs = window.samsunghealth_service_webservice
+        var UserJs = window.samsunghealth_service_user
     </script>
 </head>
 
@@ -55,16 +55,16 @@
             var params = new URLSearchParams(window.location.search);
             param1Value = params.get('param1');
 
-            // if (!UserInfoJs || typeof UserInfoJs.requestHealthUserId !== 'function') {
-            //     setOutput('UserInfoJs.requestHealthUserId is not available.\nparam1 from URL: ' +
-            //         (param1Value !== null ? param1Value : '(none)'));
-            //     return;
-            // }
+            if (!UserJs || typeof UserJs.requestHealthUserId !== 'function') {
+                setOutput('UserJs.requestHealthUserId is not available.\nparam1 from URL: ' +
+                    (param1Value !== null ? param1Value : '(none)'));
+                return;
+            }
 
             setOutput('Requesting health user id…\nparam1 from URL: ' +
                 (param1Value !== null && param1Value !== '' ? param1Value : '(missing or empty)'));
 
-            window.samsunghealth_service_user.requestHealthUserId('onHealthUserIdCallback');
+            UserJs.requestHealthUserId('onHealthUserIdCallback');
         })();
     </script>
 </body>

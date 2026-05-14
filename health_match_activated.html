@@ -55,16 +55,16 @@
             var params = new URLSearchParams(window.location.search);
             param1Value = params.get('param1');
 
-            if (!UserInfoJs || typeof UserInfoJs.requestHealthUserId !== 'function') {
-                setOutput('UserInfoJs.requestHealthUserId is not available.\nparam1 from URL: ' +
-                    (param1Value !== null ? param1Value : '(none)'));
-                return;
-            }
+            // if (!UserInfoJs || typeof UserInfoJs.requestHealthUserId !== 'function') {
+            //     setOutput('UserInfoJs.requestHealthUserId is not available.\nparam1 from URL: ' +
+            //         (param1Value !== null ? param1Value : '(none)'));
+            //     return;
+            // }
 
             setOutput('Requesting health user id…\nparam1 from URL: ' +
                 (param1Value !== null && param1Value !== '' ? param1Value : '(missing or empty)'));
 
-            UserInfoJs.requestHealthUserId(false, 'onHealthUserIdCallback');
+            window.samsunghealth_service_user.requestHealthUserId('onHealthUserIdCallback');
         })();
     </script>
 </body>

@@ -1,12 +1,531 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WebView 테스트</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ServiceJs Test</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+        }
+
+        .row {
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 0px;
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+    </style>
+    <script>
+        var AppJs = window.samsunghealth_service_app
+        var UserJs = window.samsunghealth_service_user
+        var WebViewJs = window.samsunghealth_service_webview
+        var WebServiceJs = window.samsunghealth_service_webservice
+    </script>
 </head>
+
 <body>
-  <h1>WebView 테스트 페이지</h1>
-  <p>GitHub Pages로 배포된 페이지입니다.</p>
+<div class="container">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                       aria-controls="collapseOne">Service Js Test Case</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <h3>WebServiceJs</h3>
+                    <div class="row">
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onclick="deactivate()">
+                                Service Deactivation
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="deactivate"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="activate()">
+                                Service Activation
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="activate"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="update()">
+                                Service update
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="update"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="isActivated()">
+                                isActivated
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="isActivated"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestDataPermission()">
+                                requestDataPermission
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestDataPermission"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestSAAuthCode()">
+                                requestSAAuthCode
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestSAAuthCode"></p>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label for="permissionType">permissionType:</label>
+                        </div>
+                        <div class="col-xs-10">
+                            <input input type="number" value="0" id="permissionType" class="form-control">
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="isAgreed()">
+                                isAgreed
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="isAgreed"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestAgreement()">
+                                requestAgreement
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestAgreement"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="getServiceVersion()">
+                                getServiceVersion
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="getServiceVersion"></p>
+                        </div>
+
+                    </div>
+                    <h3>AppJs</h3>
+                    <div class="row">
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestAppInfo()">
+                                requestAppInfo()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestAppInfo"></p>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestDeviceInfo()">
+                                requestDeviceInfo()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestDeviceInfo"></p>
+                        </div>
+                    </div>
+
+                    <h3>WebViewJs</h3>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="WebViewJs.close()">
+                                close()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="WV_close"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block"
+                                    onClick="WebViewJs.requestCloseOnBackPressed()">
+                                requestCloseOnBackPressed()
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block"
+                                    onClick="WebViewJs.showProgressBar()">showProgressBar()
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block"
+                                    onClick="WebViewJs.hideProgressBar()">hideProgressBar()
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block"
+                                    onClick="WebViewJs.setOnResumeListener('onResume')">
+                                setOnResumeListener()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="setWebViewLifeCycleCallbackListener"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block"
+                                    onClick="WebViewJs.setOnPauseListener('onPause')">
+                                setOnPauseListener()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="setWebViewLifeCycleCallbackListener-pause"></p>
+                        </div>
+                    </div>
+
+                    <h3>UserJs</h3>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="requestHealthUserId()">
+                                requestHealthUserId()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="requestHealthUserId"></p>
+                        </div>
+                    </div>
+
+                    <h3>Other webview</h3>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" onClick="getLocation()">
+                                getLocation()
+                            </button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="getLocation"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <label for="fileInput">Select a file:</label>
+                            <input type="file" id="fileInput" name="fileInput">
+                            <br>
+                            <button class="btn btn-primary btn-block" onclick="handleFileUpload()">Upload</button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-12">
+                            <p class="fileResult"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" id="videoCapture">Video Capture</button>
+                            <video id="videoPlayer" controls width="300"></video>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <button class="btn btn-primary btn-block" id="audioCapture">Audio Capture</button>
+                            <audio id="audioPlayer" controls width="300"></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <button class="btn btn-default" onClick="reset()">결과 초기화</button>
+        </div>
+    </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+
+    function onResume() {
+        console.log('onResume');
+        $('.setWebViewLifeCycleCallbackListener').html('onResume');
+    };
+
+    function onPause() {
+        console.log('onPause');
+        $('.setWebViewLifeCycleCallbackListener-pause').html('onPause');
+    }
+
+    var testServiceInfo = {
+        "providerId": "com.samsung.shealth",
+        "serviceId": "sample.webservice.1",
+        "serviceInfo": {
+            "resourceInfo": {
+                "templateType": 0,
+                "contentUrl": "file:///android_asset/hwebview_test_service.html",
+                "data": {
+                    "serviceIconUrl": "https://content.samsungknowledge.com/card/2017/6/image/original/qke9d8dd2d-c851-42a1-a9f9-6e4957d858ca.jpg",
+                    "partnerName": "Sample Partner",
+                    "serviceName": "Sample WebService",
+                    "description": "This is template type 0. Activated.",
+                    "ttsDesc": "Sample TTS Desc",
+                    "buttonList": [{
+                        "title": "button",
+                        "actionUrl": "",
+                        "ttsDesc": "sample tts for button"
+                    }, {
+                        "title": "button1",
+                        "actionUrl": "",
+                        "ttsDesc": "sample tts for button",
+                        "extra": "{\"version\":1, \"btType\":\"reservation\", \"flag\":true}"
+                    }],
+                    "insight": {
+                        "title": "insight title",
+                        "description": "insight description",
+                        "imgUrl": "https://content.samsungknowledge.com/card/2017/6/image/original/qke9d8dd2d-c851-42a1-a9f9-6e4957d858ca.jpg",
+                        "actionUrl": ""
+                    },
+                    "bgImgUrl": "https://api-mock.test.samsungknowledge.com/static/images/health-hub-intro-image.webp",
+                },
+            },
+            "deactivationUrl":"https://www.google.co.kr/",
+            "deactivationApi": "https://www.google.co.kr/",
+            "serviceDataApi": "https://www.google.co.kr/",
+            "serviceName": "test service card",
+            "serviceVersion": "1"
+        }
+    }
+
+
+    function deactivate() {
+        WebServiceJs.deactivate("com.samsung.shealth", "sample.webservice.1", "deactivateCallback");
+        //samsunghealth_service_webview.close();
+    }
+
+    function deactivateCallback(resultCode) {
+        console.log('deactivateCallback');
+        $('.deactivate').html('resultCode:' + resultCode);
+    }
+
+    function activate() {
+        var serviceDataString = JSON.stringify(testServiceInfo);
+        WebServiceJs.activate(serviceDataString, "activateCallback");
+    }
+
+    function activateCallback(resultCode, deviceId) {
+        $('.activate').html('resultCode:' + resultCode + ',deviceId:' + deviceId);
+    }
+
+    function update() {
+        goToWebServiceJsTestPage();
+    }
+
+    function isActivated() {
+        WebServiceJs.isActivated("com.samsung.shealth", "sample.webservice.1", "isActivatedCallback");
+    }
+
+    function isActivatedCallback(resultCode, isActivated) {
+        $('.isActivated').html('resultCode:' + resultCode + ',isActivated:' + isActivated);
+    }
+
+    function requestSAAuthCode() {
+        WebServiceJs.requestSaAuthCode("com.samsung.shealth", "sample.webservice.1", '3m4dpk7gu0', 'callbackForRequestSAAuthCode');
+    }
+
+    function callbackForRequestSAAuthCode(resultCode, code) {
+        $('.requestSAAuthCode').html(resultCode + ',' + code);
+    }
+
+    function getServiceVersion() {
+        var version = WebServiceJs.getServiceVersion()
+        $('.getServiceVersion').html('version:' + version);
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            $('.getLocation').html("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        console.log("latitude:" + position.coords.latitude)
+        $('.getLocation').html("위도: " + position.coords.latitude + "<br>경도: " + position.coords.longitude);
+    }
+
+    function showError(error) {
+        $('.getLocation').html("Geolocation error: " + error);
+    }
+
+    function requestDataPermission() {
+        WebServiceJs.requestDataPermission(
+            "com.samsung.shealth", "sample.webservice.1",
+            "com.samsung.android.app.shealth.intent.action.NUTRITION_PLUS_DATA_PERMISSION", "requestDataPermissionCallback"
+        )
+    }
+
+    function requestDataPermissionCallback(resultCode, permissionResult) {
+        $('.requestDataPermission').html('resultCode:' + resultCode + ',permissionResult' + permissionResult);
+    }
+
+    function isAgreed() {
+        var permissionType = $('#permissionType').val();
+        alert("TT:" + permissionType);
+        WebServiceJs.isAgreed("com.samsung.shealth", "sample.webservice.1", permissionType, "isAgreedCallback");
+    }
+
+    function isAgreedCallback(resultCode, isAgreed) {
+        $('.isAgreed').html('resultCode:' + resultCode + ',isAgreed:' + isAgreed);
+    }
+
+    function requestAgreement() {
+        var permissionType = $('#permissionType').val();
+        WebServiceJs.requestAgreement(
+            "com.samsung.shealth", "sample.webservice.1", permissionType, "requestAgreementCallback"
+        )
+    }
+
+    function requestAgreementCallback(resultCode, permissionResult) {
+        $('.requestAgreement').html('resultCode:' + resultCode + ',permissionResult:' + permissionResult);
+    }
+
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            document.getElementById('fileResult').textContent = 'Selected file: ' + file.name;
+        }
+    });
+
+    function handleFileUpload() {
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length > 0) {
+            alert('File uploaded: ' + fileInput.files[0].name);
+        } else {
+            alert('No file selected.');
+        }
+    }
+
+    const videoButton = document.getElementById('videoCapture');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const audioButton = document.getElementById('audioCapture');
+    const audioPlayer = document.getElementById('audioPlayer');
+
+    videoButton.addEventListener('click', async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            videoPlayer.srcObject = stream;
+            videoPlayer.play();
+        } catch (error) {
+            console.error('비디오 캡처 실패:', error);
+        }
+
+
+    });
+
+    audioButton.addEventListener('click', async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            audioPlayer.srcObject = stream;
+            audioPlayer.play();
+        } catch (error) {
+            console.error('오디오 캡처 실패:', error);
+        }
+
+    });
+
+
+    function reset() {
+        $('p').html('');
+    };
+
+    function requestAppInfo() {
+        AppJs.requestAppInfo('callbackForAppInfo');
+    };
+
+    function callbackForAppInfo(resultCode, info) {
+        $('.requestAppInfo').html(resultCode + ',' + info);
+    }
+
+    function requestDeviceInfo() {
+        AppJs.requestDeviceInfo('callbackForDeviceInfo');
+    };
+
+    function callbackForDeviceInfo(resultCode, info) {
+        $('.requestDeviceInfo').html(resultCode + ',' + info);
+    }
+
+    function requestHealthUserId() {
+        UserJs.requestHealthUserId('callbackForUserId');
+    }
+
+    function callbackForUserId(resultCode, info) {
+        $('.requestHealthUserId').html(resultCode + ',' + info);
+    }
+
+
+    function goToWebServiceJsTestPage() {
+        window.location.href = "./service_card_test_update.html"
+    }
+
+</script>
 </body>
+
 </html>

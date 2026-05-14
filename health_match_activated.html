@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health match activated</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 16px;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        }
+        h1 {
+            margin: 0 0 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        #output {
+            margin-top: 12px;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+        var WebServiceJs = window.samsunghealth_service_webservice
+    </script>
+</head>
+
+<body>
+    <h1>Health match activated</h1>
+    <div id="output"></div>
+
+    <script>
+        var param1Value = null;
+
+        function setOutput(text) {
+            document.getElementById('output').textContent = text;
+        }
+
+        function onHealthUserIdCallback(resultCode, healthUserId) {
+            var lines = [
+                'param1: ' + (param1Value !== null && param1Value !== '' ? param1Value : '(missing or empty)'),
+                'resultCode: ' + resultCode + ' (0=success, 1=failure)',
+                'healthUserId: ' + (healthUserId != null ? healthUserId : '')
+            ];
+            setOutput(lines.join('\n'));
+        }
+
+        (function onPageLoad() {
+            var params = new URLSearchParams(window.location.search);
+            param1Value = params.get('param1');
+
+            if (!WebServiceJs || typeof WebServiceJs.requestHealthUserId !== 'function') {
+                setOutput('WebServiceJs.requestHealthUserId is not available.\nparam1 from URL: ' +
+                    (param1Value !== null ? param1Value : '(none)'));
+                return;
+            }
+
+            setOutput('Requesting health user id…\nparam1 from URL: ' +
+                (param1Value !== null && param1Value !== '' ? param1Value : '(missing or empty)'));
+
+            WebServiceJs.requestHealthUserId('onHealthUserIdCallback');
+        })();
+    </script>
+</body>
+
+</html>

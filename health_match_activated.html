@@ -55,8 +55,8 @@
             var params = new URLSearchParams(window.location.search);
             param1Value = params.get('param1');
 
-            if (!WebServiceJs || typeof WebServiceJs.requestHealthUserId !== 'function') {
-                setOutput('WebServiceJs.requestHealthUserId is not available.\nparam1 from URL: ' +
+            if (!WebServiceJs || typeof UserJs.requestHealthUserId !== 'function') {
+                setOutput('UserJs.requestHealthUserId is not available.\nparam1 from URL: ' +
                     (param1Value !== null ? param1Value : '(none)'));
                 return;
             }
@@ -64,7 +64,7 @@
             setOutput('Requesting health user id…\nparam1 from URL: ' +
                 (param1Value !== null && param1Value !== '' ? param1Value : '(missing or empty)'));
 
-            WebServiceJs.requestHealthUserId('onHealthUserIdCallback');
+            UserJs.requestHealthUserId('onHealthUserIdCallback');
         })();
     </script>
 </body>

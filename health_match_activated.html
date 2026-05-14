@@ -55,7 +55,7 @@
             var params = new URLSearchParams(window.location.search);
             param1Value = params.get('param1');
 
-            if (!WebServiceJs || typeof UserJs.requestHealthUserId !== 'function') {
+            if (!UserJs || typeof UserJs.requestHealthUserId !== 'function') {
                 setOutput('UserJs.requestHealthUserId is not available.\nparam1 from URL: ' +
                     (param1Value !== null ? param1Value : '(none)'));
                 return;

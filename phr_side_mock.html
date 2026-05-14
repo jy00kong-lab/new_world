@@ -48,9 +48,22 @@
 </div>
 <script>
     (function () {
-        var WALGREENS_DEEPLINK = 'https://shealth.samsung.com/deepLink?sc_id=app.main&action=view&destination=web.service&provider_id=com.walgreens&service_id=com.walgreens.vaccines&param1=1234';
+        var WALGREENS_DEEPLINK = 'https://shealth.samsung.com/deepLink?sc_id=app.main&action=view&destination=web.service&provider_id=com.walgreens&service_id=com.walgreens.vaccines';
+
+        function buildWalgreensUrlWithParam1(param1Value) {
+            var url = new URL(WALGREENS_DEEPLINK);
+            url.searchParams.set('param1', param1Value != null ? String(param1Value) : '');
+            return url.toString();
+        }
+
         document.getElementById('linkHealthRecords').addEventListener('click', function () {
-            window.location.href = WALGREENS_DEEPLINK;
+            var PhrWeb = window.PhrWebInterface;
+            if (!PhrWeb || typeof PhrWeb.requestHealthUserId !== 'function') {
+                console.error('PhrWebInterface.requestHealthUserId is not available');
+                return;
+            }
+            var healthUserId = PhrWeb.requestHealthUserId();
+            window.location.href = buildWalgreensUrlWithParam1(healthUserId);
         });
     })();
 </script>

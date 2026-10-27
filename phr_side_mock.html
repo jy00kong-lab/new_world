@@ -22,29 +22,11 @@
             color: #222;
             margin: 0 0 20px;
         }
-        .btn-link {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 14px 18px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background: #1a73e8;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .btn-link:active {
-            opacity: 0.92;
-        }
     </style>
 </head>
 <body>
 <div class="wrap">
     <h1>Health Record Mock</h1>
-    <button type="button" class="btn-link" id="linkHealthRecords">Link with Health Records</button>
 </div>
 <script>
     (function () {
@@ -56,15 +38,13 @@
             return url.toString();
         }
 
-        document.getElementById('linkHealthRecords').addEventListener('click', function () {
-            var PhrWeb = window.PhrWebInterface;
-            if (!PhrWeb || typeof PhrWeb.requestHealthUserId !== 'function') {
-                console.error('PhrWebInterface.requestHealthUserId is not available');
-                return;
-            }
-            var healthUserId = PhrWebInterface.requestHealthUserId();
-            window.location.href = buildWalgreensUrlWithParam1(healthUserId);
-        });
+        var PhrWeb = window.PhrWebInterface;
+        if (!PhrWeb || typeof PhrWeb.requestHealthUserId !== 'function') {
+            console.error('PhrWebInterface.requestHealthUserId is not available');
+            return;
+        }
+        var healthUserId = PhrWeb.requestHealthUserId();
+        window.location.replace(buildWalgreensUrlWithParam1(healthUserId));
     })();
 </script>
 </body>
